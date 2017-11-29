@@ -1,0 +1,10 @@
+/Users/piercebelton/Desktop/code/csharp_basics/bin/Debug/netcoreapp2.0/csharp_basics.deps.json
+/Users/piercebelton/Desktop/code/csharp_basics/bin/Debug/netcoreapp2.0/csharp_basics.runtimeconfig.json
+/Users/piercebelton/Desktop/code/csharp_basics/bin/Debug/netcoreapp2.0/csharp_basics.runtimeconfig.dev.json
+/Users/piercebelton/Desktop/code/csharp_basics/bin/Debug/netcoreapp2.0/csharp_basics.dll
+/Users/piercebelton/Desktop/code/csharp_basics/bin/Debug/netcoreapp2.0/csharp_basics.pdb
+/Users/piercebelton/Desktop/code/csharp_basics/obj/Debug/netcoreapp2.0/csharp_basics.csproj.CoreCompileInputs.cache
+/Users/piercebelton/Desktop/code/csharp_basics/obj/Debug/netcoreapp2.0/csharp_basics.AssemblyInfoInputs.cache
+/Users/piercebelton/Desktop/code/csharp_basics/obj/Debug/netcoreapp2.0/csharp_basics.AssemblyInfo.cs
+/Users/piercebelton/Desktop/code/csharp_basics/obj/Debug/netcoreapp2.0/csharp_basics.dll
+/Users/piercebelton/Desktop/code/csharp_basics/obj/Debug/netcoreapp2.0/csharp_basics.pdb
