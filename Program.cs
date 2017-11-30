@@ -217,10 +217,37 @@ namespace csharp_basics
             */
 
             string sampString = "A bunch of random words";
+            string sampString2 = "more random words";
 
             Console.WriteLine("Is empty " + String.IsNullOrEmpty(sampString));
             Console.WriteLine("Is white space " + String.IsNullOrWhiteSpace(sampString));
             Console.WriteLine("Length of string is " + sampString.Length);
+
+            Console.WriteLine("Index of bunch " + sampString.IndexOf("bunch"));
+            Console.WriteLine("2nd Word " +  sampString.Substring(2, 6));
+            Console.WriteLine("Strings Equal? " + sampString.Equals(sampString2));
+            Console.WriteLine("Starts with \"A bunch\" " + sampString.StartsWith("A bunch"));
+            Console.WriteLine("ends with random words " + sampString.EndsWith("random words"));
+
+            sampString = sampString.Trim(); // also TrimEnd and TrimStart
+
+            sampString.Replace("words", "characters");
+            Console.WriteLine(sampString);
+
+            sampString.Remove(0, 2);
+
+            string[] names = new string[3] {"Pierce", "Dad", "Melissa"};
+
+            Console.WriteLine("Name List: " + String.Join(", ", names));
+
+            string fmtStr = String.Format("{0:c} {1:00.00} {2:#.00} {3:0,0}", 1.56);
+
+            Console.WriteLine(fmtStr);
+
+
+            // String builder
+
+            StringBuilder sb = new StringBuilder();
  
         }
     }
