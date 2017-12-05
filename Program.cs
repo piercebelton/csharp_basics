@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace csharp_basics
 {
@@ -240,14 +241,62 @@ namespace csharp_basics
 
             Console.WriteLine("Name List: " + String.Join(", ", names));
 
-            string fmtStr = String.Format("{0:c} {1:00.00} {2:#.00} {3:0,0}", 1.56);
+            // string fmtStr = String.Format("{0:c} {1:00.00} {2:#.00} {3:0,0}", 1.56);
 
-            Console.WriteLine(fmtStr);
+            // Console.WriteLine(fmtStr);
+
+
 
 
             // String builder
 
             StringBuilder sb = new StringBuilder();
+
+            sb.Append("This is the first sentence. ");
+            Console.WriteLine(sb);
+
+            sb.AppendFormat("My name is {0} and I live in {1}", "Pierce", "San Diego");
+            Console.WriteLine(sb);
+
+            //replaces all "a"s with "e"s
+            sb.Replace("a","e");
+            Console.WriteLine(sb);
+
+            //deletes everything in index 5 UP TO BUT NOT INCLUDING 7
+            sb.Remove(5, 7);
+            
+            sb.Clear();
+
+
+
+
+            //Arrays
+
+            int[] randNumArray;
+
+            int[] randArray = new int[5];
+            
+            int[] randArray2 = {1, 2, 3, 4, 5};
+
+            Console.WriteLine("Array Length " + randArray2.Length);
+
+            Console.WriteLine("Array Item 0 " + randArray2[0]);
+
+            for (int k = 0; k< randArray2.Length; k++)
+            {
+                Console.WriteLine("{0} : {1}", k, randArray2[k]);
+            }
+
+            foreach(int num in randArray2)
+            {
+                Console.WriteLine(num);
+            }
+
+            Console.WriteLine("Where is 1? Index: " + Array.IndexOf(randArray2, 1));
+
+            string[] familyNames = {"Pierce", "Melly", "Bruce"};
+
+            string nameStr = string.Join(", ", familyNames);
  
         }
     }
