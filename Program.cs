@@ -1,5 +1,11 @@
-﻿using System;
+﻿// Default namespace, required for all C# apps
+using System;
+
+// req'd for StringBuilder 
 using System.Text;
+
+// req'd for List data type
+using System.Collections.Generic;
 
 namespace csharp_basics
 {
@@ -297,7 +303,70 @@ namespace csharp_basics
             string[] familyNames = {"Pierce", "Melly", "Bruce"};
 
             string nameStr = string.Join(", ", familyNames);
+            Console.WriteLine(nameStr);
+
+            string[] nameArray = nameStr.Split(',');
+            Console.WriteLine(nameArray);
+
+            int[,] multArray = new int[5, 3];
+
+            int[,] multArray2 = {{0, 1}, {2, 3}, {4, 5}};
+
+            foreach(int num in multArray2)
+            {
+                Console.WriteLine(num);
+            }
+
+            for (int a = 0; a < multArray2.GetLength(0); a++)
+            {
+                for(int b = 0; b < multArray2.GetLength(1); b++)
+                {
+                    Console.WriteLine("{0} | {1} : {2}" + a, b, multArray2[a,b]);
+                }
+            }
  
+
+
+            // Lists
+
+            List<int> numList = new List<int>();
+
+            numList.Add(5);
+            numList.Add(8);
+            numList.Add(12);
+
+            int[] randArray3 = {1, 2, 3, 4, 5};
+            numList.AddRange(randArray);
+
+            List<int> numList2 = new List<int>(randArray3);
+
+            List<int> numList3 = new List<int>(new int[] {1, 2, 3, 4});
+
+            // inserts "10" into index 1 of the list
+            numList.Insert(1, 10);
+
+            // removes value 5 from the list
+            numList.Remove(5);
+
+            // remove item at index of 2 from list
+            numList.RemoveAt(2);
+
+            for (int c = 0; c < numList.Count; c++)
+            {
+                Console.WriteLine(numList[c]);
+            }
+
+            // finds index of a value, returns -1 if not found
+            Console.WriteLine("4 is in index " + numList3.IndexOf(4));
+
+            Console.WriteLine("5 in List? " + numList.Contains(5));
+
+            List<string> strList = new List<string>(new string[] {"Tom", "Paul"});
+
+            Console.WriteLine("Tom in List? " + strList.Contains("Tom"));
+
+            strList.Sort();
+        
         }
     }
 }
