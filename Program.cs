@@ -6,9 +6,42 @@ using System.Text;
 
 // req'd for List data type
 using System.Collections.Generic;
+using System.Linq;
 
 namespace csharp_basics
 {
+    public enum Temperature
+    {
+        Freeze,
+        Low,
+        Warm,
+        Boil
+    }
+
+    struct Customers
+    {
+        private string name;
+        private double balance;
+        private int id;
+
+        public void createCust(string n, double b, int i)
+        {
+            name = n;
+            balance = b;
+            id = i;
+        }
+
+        public void showCust()
+        {
+            Console.WriteLine("Name " + name);
+            Console.WriteLine("Balance " + balance);
+            Console.WriteLine("ID " + id);
+        }
+    }
+
+
+    delegate double GetSum(double num1, double num2);
+
     class Animal
     {
         // public: access unlimited
@@ -60,7 +93,7 @@ namespace csharp_basics
 
         public string toString()
         {
-            return String.Format("{0} is {1} inches tall, weights {2} lbs and likes to say {3}", name, height, weight, sound);
+            return String.Format("{0} is {1} inches tall, weighs {2} lbs and likes to say {3}", name, height, weight, sound);
         }
 
         public int getSum(int num1 = 1, int num2 = 1)
@@ -102,8 +135,72 @@ namespace csharp_basics
 
             Console.WriteLine(spot.getSum(num2: 3.7, num1: 2.5));
 
+            Dog spike = new Dog();
+            Console.WriteLine(spike.toString());
+
+            spike = new Dog(20, 15, "Spike", "Grr", "Chicken");
+            Console.WriteLine(spike.toString());
 
 
+            Shape rect = new Rectangle(5, 5);
+            Shape tri = new Triangle(5, 5);
+
+            Console.WriteLine("Rect area = " + rect.area());
+            Console.WriteLine("Tri area = " + tri.area());
+
+            Rectangle combRect = new Rectangle(5, 5) + new Rectangle(5, 5);
+
+            Console.WriteLine("combRect Area = " + combRect.area());
+
+
+
+            KeyValue<string, string> superman = new KeyValue<string, string>("", "");
+
+            superman.key = "Superman";
+            superman.value = "Clark Kent";
+            superman.showData();
+
+
+            KeyValue<int, string> samsungTv = new KeyValue<int, string>(0, "");
+
+            samsungTv.key = 1234;
+            samsungTv.value = "50 inch tv";
+            samsungTv.showData();
+
+
+
+            Temperature micTemp = Temperature.Low;
+
+
+            Customers bob = new Customers();
+
+            bob.createCust("Bob", 15.50, 12345);
+
+            bob.showCust();
+
+
+
+            GetSum sum = delegate(double num1, double num2)
+            {
+                return num1 + num2;
+            };
+
+            Console.WriteLine("5 + 10 = " + sum(5, 10));
+
+
+            Func<int, int, int> getSum = (x, y) => x + y;
+
+            Console.WriteLine("5 + 3 = " +getSum.Invoke(5, 3));
+
+
+            List<int> numList4 = new List<int> {5, 10, 15, 20, 25};
+
+            List<int> oddNums = numList4.Where(nameof => nameof % 2 == 1).ToList();
+
+            foreach(int num in oddNums)
+            {
+                Console.WriteLine(num + ", ");
+            }
             
             
             //comments
@@ -508,6 +605,88 @@ namespace csharp_basics
         public Dog(double height, double weight, string name, string sound, string favFood) : base(height, weight, name, sound)
         {
             this.favFood = favFood;
+        }
+
+        // 'new' overrides the parent function
+        new public string toString()
+        {
+            return String.Format("{0} is {1} inches tall, weights {2} lbs and likes to say {3} and eats {4}", name, height, weight, sound, favFood);
+        }        
+
+    }
+
+    abstract class Shape
+    {
+        public abstract double area();
+
+        public void sayHi()
+        {
+            Console.WriteLine("Hello");
+        }
+    }
+
+    public interface ShapeItem
+    {
+        double area();
+    }
+
+    class Rectangle : Shape
+    {
+        private double length;
+        private double width;
+
+        public Rectangle(double num1, double num2)
+        {
+            length = num1;
+            width = num2;
+        }
+        public override double area()
+        {
+            return length * width;
+        }
+
+        public static Rectangle operator+ (Rectangle rect1, Rectangle rect2)
+        {
+            double rectLength = rect1.length + rect2.length;
+            double rectWidth = rect1.width + rect2.width;
+
+            return new Rectangle(rectLength, rectWidth);
+        }
+    
+    }
+
+
+    class Triangle : Shape
+    {
+        private double theBase;
+        private double height;
+
+        public Triangle(double num1, double num2)
+        {
+            theBase = num1;
+            height = num2;
+        }
+
+        public override double area()
+        {
+            return .5 * (theBase * height);
+        }
+    }
+
+    class KeyValue<TKey, TValue>
+    {
+        public TKey key { get; set;}
+        public TValue value { get; set;}
+
+        public KeyValue(TKey l, TValue v)
+        {
+            key = l;
+            value = v;
+        }
+
+        public void showData()
+        {
+            Console.WriteLine("{0} is {1}", this.key, this.value);
         }
     }
 
