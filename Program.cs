@@ -9,13 +9,110 @@ using System.Collections.Generic;
 
 namespace csharp_basics
 {
-    class Program
+    class Animal
     {
+        // public: access unlimited
+        // protected: limits access to specific class methods and sub-class methods
+        // private: limits access to specific class methods
+
+        // auto getters and setters
+        public double height {get; set;}
+        public double weight {get; set;}
+        public string sound {get; set;}
+
+        // manually creating getters and setters, in case we need constraints etc.
+        public string name;
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        // setting default values
+        public Animal()
+        {
+            this.height = 0;
+            this.weight = 0;
+            this.name = "No Name";
+            this.sound = "No Sound";
+            numOfAnimals++;
+        }
+
+        // initializing an object
+        public Animal(double height, double weight, string name, string sound)
+        {
+            this.height = height;
+            this.weight = weight;
+            this.name = name;
+            this.sound = sound;
+            numOfAnimals++;
+        }
+
+
+        // static so that it is not called by the class
+        // static methods cannot access class attributes
+        static int numOfAnimals = 0;
+
+        public static int getNumOfAnimals()
+        {
+            return numOfAnimals;
+        }
+
+        public string toString()
+        {
+            return String.Format("{0} is {1} inches tall, weights {2} lbs and likes to say {3}", name, height, weight, sound);
+        }
+
+        public int getSum(int num1 = 1, int num2 = 1)
+        {
+            return num1 + num2;
+        }
+
+        //method overloading 
+        public double getSum(double num1 = 1, double num2 = 1)
+        {
+            return num1 + num2;
+        }
+
         static void Main(string[] args)
         {
+            // init object using constructor
+            Animal spot = new Animal(15, 10, "Spot", "Woof");
+            Animal jackie = new Animal
+            {
+                name = "Jackie",
+                height = 7,
+                weight = 13,
+                sound = "ruff"
+            };
+
+            //calling object attributes
+            Console.WriteLine("{0} says {1}", spot.name, spot.sound);
+
+            //calling class methods
+            Console.WriteLine("Number of Animals " + Animal.getNumOfAnimals());
+
+            //calling object methods
+            Console.WriteLine(spot.toString());
+
+            //method overloading allows multiple types
+            Console.WriteLine(spot.getSum(1, 2));
+            Console.WriteLine(spot.getSum(1.2, 3.5));
+
+
+            Console.WriteLine(spot.getSum(num2: 3.7, num1: 2.5));
+
+
+
+            
+            
             //comments
             /* multiline
             comments */
+            
+            /* commenting old code to clean up terminal
+            
+            
             Console.Write("What is your name? ");
             string name = "Pierce";
             // string name = Console.ReadLine();
@@ -150,16 +247,14 @@ namespace csharp_basics
                     Console.WriteLine("Infant");
                     break;
                 case 1:
-                    Console.WriteLine("Toddler");
-                    goto Terrible;
+                    Console.WriteLine("Toddlers are terrible");
                     break;
                 default:
                     Console.WriteLine("Child");
                     break;
             }
 
-            Terrible:
-            Console.WriteLine("Toddlers are terrible");
+            
 
 
 
@@ -213,7 +308,7 @@ namespace csharp_basics
 
 
             // More string stuff
-            /*
+            
             escapes:
             \' // single quote 
             \" // double quote 
@@ -221,7 +316,7 @@ namespace csharp_basics
             \b  // backspace
             \n  // newline
             \t  // tab 
-            */
+            
 
             string sampString = "A bunch of random words";
             string sampString2 = "more random words";
@@ -317,13 +412,13 @@ namespace csharp_basics
                 Console.WriteLine(num);
             }
 
-            for (int a = 0; a < multArray2.GetLength(0); a++)
-            {
-                for(int b = 0; b < multArray2.GetLength(1); b++)
-                {
-                    Console.WriteLine("{0} | {1} : {2}" + a, b, multArray2[a,b]);
-                }
-            }
+            // for (int a = 0; a < multArray2.GetLength(0); a++)
+            // {
+            //     for(int b = 0; b < multArray2.GetLength(1); b++)
+            //     {
+            //         Console.WriteLine("{0} | {1} : {2}" + a, b, multArray2[a,b]);
+            //     }
+            // }
  
 
 
@@ -367,7 +462,54 @@ namespace csharp_basics
 
             strList.Sort();
         
+
+
+
+            //Exception handling
+
+            try
+            {
+                Console.Write("Divide 10 by ");
+                int num = int.Parse(Console.ReadLine());
+                Console.WriteLine("10 / {0} = {1}", num, (10/num));
+            }
+
+            // catches specific exceptions
+            catch(DivideByZeroException ex)
+            {
+                Console.WriteLine("Can't divide by zero");
+                Console.WriteLine(ex.GetType().Name);
+                Console.WriteLine(ex.Message);
+                throw new InvalidOperationException("Operation Failed", ex);
+            }
+
+            // generic exception handler
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.GetType().Name);
+                Console.WriteLine(ex.Message);
+            }
+
+            */
+
         }
     }
+     //initialize Dog class as a child of Animal
+    class Dog : Animal
+    {
+        public string favFood { get; set; }
+
+        // : base() adds constructors from parent class as well
+        public Dog() : base()
+        {
+            this.favFood = "No Favorite Food";
+        }
+
+        public Dog(double height, double weight, string name, string sound, string favFood) : base(height, weight, name, sound)
+        {
+            this.favFood = favFood;
+        }
+    }
+
 }
 
